@@ -2,18 +2,15 @@
 use strict;
 use warnings;
 
-# Read the entire file into a single string
-$/ = undef; # Slurp mode
+# Set the input record separator to undef to slurp whole files
+local $/ = undef;
 
-# Read input from a file (or STDIN if no filename is given)
-my $filename = shift @ARGV or die "Usage: $0 filename\n";
-open my $fh, '<', $filename or die "Can't open file $filename: $!\n";
-my $content = <$fh>;
-close $fh;
+# Process each file specified on the command line or standard input
+while (my $content = <>) {
+    # Perform substitutions
+    $content =~ s/(\S+)\n(?:---).+?/```\n<\/details>\n\n<details>\n  <summary>$1<\/summary>\n\n```diff\n---/gs;
+    $content =~ s/^(?:```\n<\/details>\n\n)(.+)/$1\n```\n<\/details>\n/s;
+    # Print the modified content
+    print $content;
+}
 
-# Perform substitutions
-$content =~ s/(\S+)\n(?:---).+?/```\n<\/details>\n\n<details>\n  <summary>$1<\/summary>\n\n```diff\n---/gs;
-$content =~ s/^(?:```\n<\/details>\n\n)(.+)/$1\n```\n<\/details>\n/s;
-
-# Print the modified content
-print $content;
