@@ -1,0 +1,87 @@
+{
+  "format_version": "1.0",
+  "valid": false,
+  "error_count": 2,
+  "warning_count": 1,
+  "diagnostics": [
+    {
+      "severity": "error",
+      "summary": "Reference to undeclared resource",
+      "detail": "A data resource \"null_data_source\" \"id\" has not been declared in the root module.",
+      "range": {
+        "filename": "test.tf",
+        "start": {
+          "line": 3,
+          "column": 14,
+          "byte": 79
+        },
+        "end": {
+          "line": 3,
+          "column": 38,
+          "byte": 103
+        }
+      },
+      "snippet": {
+        "context": "resource \"null_resource\" \"test_x-x\"",
+        "code": "   command = data.null_data_source.id",
+        "start_line": 3,
+        "highlight_start_offset": 13,
+        "highlight_end_offset": 37,
+        "values": []
+      }
+    },
+    {
+      "severity": "warning",
+      "summary": "Deprecated",
+      "detail": "The null_data_source was historically used to construct intermediate values to re-use elsewhere in configuration, the same can now be achieved using locals or the terraform_data resource type in Terraform 1.4 and later.",
+      "address": "data.null_data_source.values",
+      "range": {
+        "filename": "test.tf",
+        "start": {
+          "line": 6,
+          "column": 34,
+          "byte": 143
+        },
+        "end": {
+          "line": 6,
+          "column": 35,
+          "byte": 144
+        }
+      },
+      "snippet": {
+        "context": "data \"null_data_source\" \"values\"",
+        "code": "data \"null_data_source\" \"values\" {",
+        "start_line": 6,
+        "highlight_start_offset": 33,
+        "highlight_end_offset": 34,
+        "values": []
+      }
+    },
+    {
+      "severity": "error",
+      "summary": "Reference to undeclared input variable",
+      "detail": "An input variable with the name \"image_id\" has not been declared. This variable can be declared with a variable \"image_id\" {} block.",
+      "range": {
+        "filename": "test2.tf",
+        "start": {
+          "line": 3,
+          "column": 14,
+          "byte": 79
+        },
+        "end": {
+          "line": 3,
+          "column": 26,
+          "byte": 91
+        }
+      },
+      "snippet": {
+        "context": "resource \"null_resource\" \"test_x-2\"",
+        "code": "   command = var.image_id",
+        "start_line": 3,
+        "highlight_start_offset": 13,
+        "highlight_end_offset": 25,
+        "values": []
+      }
+    }
+  ]
+}
